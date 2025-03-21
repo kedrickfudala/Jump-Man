@@ -18,7 +18,7 @@ texture = ExtResource("4_rywa6")
 region_enabled = true
 region_rect = Rect2(0, 0, 1000, 180)
 
-[node name="Level_1" parent="." instance=ExtResource("2_1vq14")]
-
 [node name="Player" parent="." instance=ExtResource("3_0afia")]
 position = Vector2(78, 344)
+
+[node name="Level_1" parent="." instance=ExtResource("2_1vq14")]

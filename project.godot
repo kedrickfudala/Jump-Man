@@ -25,6 +25,7 @@ window/stretch/mode="viewport"
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Spikes"
 2d_physics/layer_4="Coins"
+2d_physics/layer_8="PlayerDropDown"
 
 [rendering]
 

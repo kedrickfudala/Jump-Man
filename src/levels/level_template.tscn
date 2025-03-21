@@ -61,20 +61,20 @@ texture = ExtResource("1_78283")
 17:9/0 = 0
 17:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:4/0 = 0
-5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
-5:4/0/physics_layer_0/polygon_0/one_way = true
+5:4/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
+5:4/0/physics_layer_1/polygon_0/one_way = true
 6:4/0 = 0
-6:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
-6:4/0/physics_layer_0/polygon_0/one_way = true
+6:4/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
+6:4/0/physics_layer_1/polygon_0/one_way = true
 7:4/0 = 0
-7:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
-7:4/0/physics_layer_0/polygon_0/one_way = true
+7:4/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
+7:4/0/physics_layer_1/polygon_0/one_way = true
 8:4/0 = 0
-8:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
-8:4/0/physics_layer_0/polygon_0/one_way = true
+8:4/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
+8:4/0/physics_layer_1/polygon_0/one_way = true
 9:4/0 = 0
-9:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
-9:4/0/physics_layer_0/polygon_0/one_way = true
+9:4/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
+9:4/0/physics_layer_1/polygon_0/one_way = true
 5:5/0 = 0
 6:5/0 = 0
 9:8/0 = 0
@@ -99,7 +99,9 @@ texture = ExtResource("1_78283")
 
 [sub_resource type="TileSet" id="TileSet_wmadk"]
 physics_layer_0/collision_layer = 1
-physics_layer_0/collision_mask = 2
+physics_layer_0/collision_mask = 0
+physics_layer_1/collision_layer = 128
+physics_layer_1/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_ue2rp")
 
 [node name="LevelTemplate" type="Node2D"]
