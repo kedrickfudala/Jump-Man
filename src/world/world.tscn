@@ -1,13 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://6ui63as8fp2f"]
+[gd_scene load_steps=5 format=3 uid="uid://6ui63as8fp2f"]
 
 [ext_resource type="Script" path="res://src/world/world.gd" id="1_njcsn"]
 [ext_resource type="PackedScene" uid="uid://b81goyserewo3" path="res://src/levels/level_1.tscn" id="2_1vq14"]
 [ext_resource type="PackedScene" uid="uid://bpv4ps5ryfocy" path="res://src/player/player.tscn" id="3_0afia"]
+[ext_resource type="Texture2D" uid="uid://cw3jmho8x0cf5" path="res://assets/backgrounds/background_0.png" id="4_rywa6"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_njcsn")
 
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.75, 0.75)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+texture_repeat = 2
+position = Vector2(257, 301)
+texture = ExtResource("4_rywa6")
+region_enabled = true
+region_rect = Rect2(0, 0, 1000, 180)
+
 [node name="Level_1" parent="." instance=ExtResource("2_1vq14")]
 
 [node name="Player" parent="." instance=ExtResource("3_0afia")]
-position = Vector2(113, 132)
+position = Vector2(78, 344)
