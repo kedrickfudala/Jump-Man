@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c16r2sshw8b8a"
-path="res://.godot/imported/JUMP.png-09ad73e35b4cb8e42655ac027be699d8.ctex"
+uid="uid://b82px2t0ffcxo"
+path="res://.godot/imported/coins-chests-etc-2-0-noborders.png-a5d3c49b048cc7360f826befbdc1afab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/JUMP.png"
-dest_files=["res://.godot/imported/JUMP.png-09ad73e35b4cb8e42655ac027be699d8.ctex"]
+source_file="res://assets/sprites/collectibles/coins-chests-etc-2-0-noborders.png"
+dest_files=["res://.godot/imported/coins-chests-etc-2-0-noborders.png-a5d3c49b048cc7360f826befbdc1afab.ctex"]
 
 [params]
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dshwhp8pljb8g"]
+[gd_scene load_steps=6 format=3 uid="uid://dshwhp8pljb8g"]
 
 [ext_resource type="Texture2D" uid="uid://dyh5k4h053pcc" path="res://assets/tiles/tileset.png" id="1_78283"]
+[ext_resource type="PackedScene" uid="uid://de2gs4tm6bagx" path="res://src/collectibles/coin.tscn" id="2_fy8pj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ue2rp"]
 texture = ExtResource("1_78283")
@@ -97,17 +98,26 @@ texture = ExtResource("1_78283")
 10:0/0 = 0
 10:0/0/texture_origin = Vector2i(-56, 64)
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_mn1og"]
+scenes/1/scene = ExtResource("2_fy8pj")
+
 [sub_resource type="TileSet" id="TileSet_wmadk"]
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
 physics_layer_1/collision_layer = 128
 physics_layer_1/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_ue2rp")
+sources/1 = SubResource("TileSetScenesCollectionSource_mn1og")
 
 [node name="LevelTemplate" type="Node2D"]
+z_as_relative = false
 
 [node name="Ground" type="TileMapLayer" parent="."]
+z_index = 75
+z_as_relative = false
 tile_set = SubResource("TileSet_wmadk")
 
 [node name="Background" type="TileMapLayer" parent="."]
+z_index = 25
+z_as_relative = false
 tile_set = SubResource("TileSet_wmadk")

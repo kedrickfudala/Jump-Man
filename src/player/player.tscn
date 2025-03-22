@@ -1,10 +1,46 @@
-[gd_scene load_steps=47 format=3 uid="uid://bpv4ps5ryfocy"]
+[gd_scene load_steps=60 format=3 uid="uid://bpv4ps5ryfocy"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_i7oqt"]
 [ext_resource type="Texture2D" uid="uid://d0awcg4r8cnoh" path="res://assets/sprites/player/HURT.png" id="1_i70ly"]
 [ext_resource type="Texture2D" uid="uid://d0uo874qrv4ok" path="res://assets/sprites/player/IDLE.png" id="1_vsg32"]
-[ext_resource type="Texture2D" uid="uid://c16r2sshw8b8a" path="res://assets/sprites/player/JUMP2.png" id="2_0hfbi"]
+[ext_resource type="Texture2D" uid="uid://c16r2sshw8b8a" path="res://assets/sprites/player/JUMP.png" id="2_0hfbi"]
+[ext_resource type="Texture2D" uid="uid://2gwl1vkocka6" path="res://assets/sprites/player/ATTACK.png" id="2_66bvi"]
 [ext_resource type="Texture2D" uid="uid://bm8d4oljuf5pq" path="res://assets/sprites/player/RUN.png" id="3_0b2as"]
+[ext_resource type="Texture2D" uid="uid://cqmofceh4t6y8" path="res://assets/sprites/player/DASH.png" id="3_ih8db"]
+[ext_resource type="AudioStream" uid="uid://0gnvyckrd8c" path="res://assets/sfx/jump.wav" id="8_w11t0"]
+[ext_resource type="AudioStream" uid="uid://lwu2qqxxhjgg" path="res://assets/sfx/pickupCoin.wav" id="9_sww33"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgli4"]
+atlas = ExtResource("2_66bvi")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00s18"]
+atlas = ExtResource("2_66bvi")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbvci"]
+atlas = ExtResource("2_66bvi")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xprnj"]
+atlas = ExtResource("2_66bvi")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnqwh"]
+atlas = ExtResource("2_66bvi")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idffa"]
+atlas = ExtResource("2_66bvi")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vq2gu"]
+atlas = ExtResource("2_66bvi")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vboui"]
+atlas = ExtResource("3_ih8db")
+region = Rect2(0, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6enrk"]
 atlas = ExtResource("2_0hfbi")
@@ -166,6 +202,40 @@ region = Rect2(1440, 0, 96, 96)
 animations = [{
 "frames": [{
 "duration": 0.5,
+"texture": SubResource("AtlasTexture_hgli4")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_00s18")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_cbvci")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_xprnj")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_dnqwh")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_idffa")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_vq2gu")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vboui")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_6enrk")
 }, {
 "duration": 0.5,
@@ -315,7 +385,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ddecq"]
 size = Vector2(14, 33)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dd3m5"]
+size = Vector2(18, 37)
+
 [node name="Player" type="CharacterBody2D"]
+z_index = 50
+z_as_relative = false
 collision_layer = 2
 collision_mask = 129
 script = ExtResource("1_i7oqt")
@@ -323,7 +398,7 @@ script = ExtResource("1_i7oqt")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -33)
 sprite_frames = SubResource("SpriteFrames_y7dbk")
-animation = &"midair"
+animation = &"dash"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -16.5)
@@ -334,8 +409,31 @@ offset = Vector2(0, -50)
 zoom = Vector2(2.5, 2.5)
 position_smoothing_enabled = true
 
-[node name="JumpTimer" type="Timer" parent="."]
+[node name="JumpAnimTimer" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true
 
-[connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]
+[node name="DashAnimTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="DashCooldown" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="CollectiblePickup" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectiblePickup"]
+position = Vector2(0, -16.5)
+shape = SubResource("RectangleShape2D_dd3m5")
+
+[node name="JumpSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_w11t0")
+volume_db = -10.0
+
+[node name="PickupSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_sww33")
+
+[connection signal="timeout" from="JumpAnimTimer" to="." method="_on_jump_anim_timer_timeout"]

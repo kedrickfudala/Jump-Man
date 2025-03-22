@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c16r2sshw8b8a"
-path="res://.godot/imported/JUMP2.png-9c234863715bd832a672dc804da5b74f.ctex"
+uid="uid://cqmofceh4t6y8"
+path="res://.godot/imported/DASH.png-c3fa525723919692522052b12eddbc13.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/JUMP2.png"
-dest_files=["res://.godot/imported/JUMP2.png-9c234863715bd832a672dc804da5b74f.ctex"]
+source_file="res://assets/sprites/player/DASH.png"
+dest_files=["res://.godot/imported/DASH.png-c3fa525723919692522052b12eddbc13.ctex"]
 
 [params]
 
