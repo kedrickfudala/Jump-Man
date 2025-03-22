@@ -7,3 +7,4 @@ class_name World
 
 func _ready():
 	RenderingServer.set_default_clear_color(Color("2e5a89"))
+	$MusicPlayer.play()

@@ -26,15 +26,16 @@ func handle_input(delta):
 			set_collision_mask_value(8, true)
 	else:
 		if Input.is_action_just_pressed("jump") and jumps > 0:
-			velocity.y = -250
+			velocity.y = -225
 			jumps -= 1
 			falling = false
 			$JumpAnimTimer.stop()
 			$JumpSFX.play()
-	if Input.is_action_just_pressed("dash") and $DashCooldown.is_stopped():
-		velocity = dash_dir * 250
+	if Input.is_action_just_pressed("dash") and $DashCooldown.is_stopped() and dash_dir != Vector2(0,0):
+		velocity = dash_dir * 200
 		$DashCooldown.start()
 		$DashAnimTimer.start()
+		$DashSFX.play()
 	if $DashAnimTimer.is_stopped():
 		velocity.x += dir * speed
 		velocity.y += 10
@@ -50,6 +51,7 @@ func handle_anims():
 	if !$DashAnimTimer.is_stopped():
 		$Sprite.play("dash")
 	elif !is_on_floor():
+		$RunSFX.stop()
 		if velocity.y < 0:
 			$Sprite.play("jump_up")
 		if velocity.y > 0:
@@ -61,8 +63,11 @@ func handle_anims():
 				$Sprite.play("midair")
 	elif dir != 0:
 		$Sprite.play("run")
+		if !$RunSFX.playing and is_on_floor():
+			$RunSFX.play()
 	else:
 		$Sprite.play("idle")
+		$RunSFX.stop()
 
 func pickup_coin():
 	coins += 1

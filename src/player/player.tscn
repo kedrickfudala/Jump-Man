@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://bpv4ps5ryfocy"]
+[gd_scene load_steps=62 format=3 uid="uid://bpv4ps5ryfocy"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_i7oqt"]
 [ext_resource type="Texture2D" uid="uid://d0awcg4r8cnoh" path="res://assets/sprites/player/HURT.png" id="1_i70ly"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://cqmofceh4t6y8" path="res://assets/sprites/player/DASH.png" id="3_ih8db"]
 [ext_resource type="AudioStream" uid="uid://0gnvyckrd8c" path="res://assets/sfx/jump.wav" id="8_w11t0"]
 [ext_resource type="AudioStream" uid="uid://lwu2qqxxhjgg" path="res://assets/sfx/pickupCoin.wav" id="9_sww33"]
+[ext_resource type="AudioStream" uid="uid://85dtw2gb0wnb" path="res://assets/sfx/dash.wav" id="10_rl6dk"]
+[ext_resource type="AudioStream" uid="uid://1vc63ppx7h56" path="res://assets/sfx/501102__evretro__8-bit-footsteps.wav" id="11_ug562"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hgli4"]
 atlas = ExtResource("2_66bvi")
@@ -383,10 +385,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ddecq"]
-size = Vector2(14, 33)
+size = Vector2(14, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dd3m5"]
-size = Vector2(18, 37)
+size = Vector2(18, 34)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 50
@@ -398,15 +400,17 @@ script = ExtResource("1_i7oqt")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -33)
 sprite_frames = SubResource("SpriteFrames_y7dbk")
-animation = &"dash"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -16.5)
+position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_ddecq")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -50)
 zoom = Vector2(2.5, 2.5)
+limit_left = 0
+limit_right = 1152
 position_smoothing_enabled = true
 
 [node name="JumpAnimTimer" type="Timer" parent="."]
@@ -414,7 +418,7 @@ wait_time = 0.15
 one_shot = true
 
 [node name="DashAnimTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.3
 one_shot = true
 
 [node name="DashCooldown" type="Timer" parent="."]
@@ -426,14 +430,23 @@ collision_layer = 2
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectiblePickup"]
-position = Vector2(0, -16.5)
+position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_dd3m5")
 
-[node name="JumpSFX" type="AudioStreamPlayer" parent="."]
+[node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_w11t0")
 volume_db = -10.0
 
-[node name="PickupSFX" type="AudioStreamPlayer" parent="."]
+[node name="PickupSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_sww33")
+
+[node name="DashSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_rl6dk")
+volume_db = -5.0
+pitch_scale = 0.8
+
+[node name="RunSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_ug562")
+pitch_scale = 0.9
 
 [connection signal="timeout" from="JumpAnimTimer" to="." method="_on_jump_anim_timer_timeout"]
